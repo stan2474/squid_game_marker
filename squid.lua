@@ -14,27 +14,34 @@ OldNamecall = hookmetamethod(game, "__namecall", function(Self, ...)
    return OldNamecall(Self, ...)
 end)
 
+
+--picosecond optimizations op!!!!
+local game = game
+local string = string
+
+local GetService = game.GetService
+local IsA = game.IsA
+local Workspace = GetService(game, "Workspace")
+local GetDescendants = game.GetDescendants
+local FindFirstChild = game.FindFirstChild
+local FindFirstAncestorOfClass = game.FindFirstAncestorOfClass
+
+local Guess = Workspace.Guess
+local GetDescTable = GetDescendants(Workspace.Guess)
+local strFind = string.find
+local tonum = tonumber
+local hidesel = syn.protect_gui or gethui or get_hidden_gui
+
 local function passCheck(ist)
-    if string.find(ist, "1") or string.find(ist, "2") then
+    if strFind(ist, "1") or strFind(ist, "2") then
         return true
     end
     return nil
 end
 
---picosecond optimizations op!!!!
-local game = game
-local GetService = game.GetService
-local IsA = game.IsA
-local Workspace = GetService(game, "Workspace")
-local GetDescendants = game.GetDescendants
-local FindFirstAncestorOfClass = game.FindFirstAncestorOfClass
-local Guess = Workspace.Guess
-local GetDescTable = GetDescendants(Workspace.Guess)
-local tonum = tonumber
-local hidesel = syn.protect_gui or gethui or get_hidden_gui
 for troll=1, #GetDescTable do
        local v = GetDescTable[troll]
-       if IsA(v, "Part") and v:FindFirstChild("TouchInterest") and passCheck(v.Name) then
+       if IsA(v, "Part") and FindFirstChild(v, "TouchInterest") and passCheck(v.Name) then
            v.TouchInterest:Destroy()
            v.Touched.Connect(v.Touched, function(part)
                local char = FindFirstAncestorOfClass(part, "Model")
