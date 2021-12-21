@@ -33,10 +33,10 @@ local tonum = tonumber
 local hidesel = syn.protect_gui or gethui or get_hidden_gui
 
 local function passCheck(ist)
-    if strFind(ist, "1") or strFind(ist, "2") then
-        return true
-    end
-    return nil
+
+
+
+    return true 
 end
 
 for troll=1, #GetDescTable do
