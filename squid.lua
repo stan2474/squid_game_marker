@@ -23,7 +23,7 @@ local GetService = game.GetService
 local IsA = game.IsA
 local Workspace = GetService(game, "Workspace")
 local GetDescendants = game.GetDescendants
-local FindFirstChild = game.FindFirstChild
+local FindFirstChildWhichIsA = game.FindFirstChildWhichIsA
 local FindFirstAncestorOfClass = game.FindFirstAncestorOfClass
 
 local Guess = Workspace.Guess
@@ -41,8 +41,8 @@ end
 
 for troll=1, #GetDescTable do
        local v = GetDescTable[troll]
-       if IsA(v, "Part") and FindFirstChild(v, "TouchInterest") and passCheck(v.Name) then
-           v.TouchInterest:Destroy()
+       if IsA(v, "Part") and FindFirstChildWhichIsA(v, "TouchTransmitter") and passCheck(v.Name) then
+           FindFirstChildWhichIsA(v, "TouchTransmitter"):Destroy()
            v.Touched.Connect(v.Touched, function(part)
                local char = FindFirstAncestorOfClass(part, "Model")
                local hum = char.Humanoid
