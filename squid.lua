@@ -6,15 +6,6 @@ this code is as optimized it can be
 
 local tbl = {}
 
-local OldNamecall
-OldNamecall = hookmetamethod(game, "__namecall", function(Self, ...)
-   if not checkcaller() and getnamecallmethod() == "FireServer" and Self.Name == "RemoteEvent" and game.IsA(getcallingscript().Parent, "ScreenGui") then
-       return wait(9e9)
-   end
-   return OldNamecall(Self, ...)
-end)
-
-
 --picosecond optimizations op!!!!
 local game = game
 local string = string
@@ -37,13 +28,16 @@ local function passCheck(ist)
     local _, isOnScreen = WorldToScreenPoint(Camera, ist.Position)
     return isOnScreen
 end
+
 if game.Players.LocalPlayer.UserId == game.CreatorId then
    game.Players.LocalPlayer:Kick("THIS SOFTWARE MUST NOT BE SOLD NEITHER ALONE NOR AS PART OF A BUNDLE.\nIF YOU PAID FOR THIS SOFTWARE OR RECEIVED IT AS A PART OF YOUR BUNDLE FOLLOWING PAYMENT, YOU HAVE BEEN SCAMMED AND SHOULD DEMAND YOUR MONEY BACK IMMEDIATELY\nFor further details see http://hbc.hackmii.com/scam")
 end
 for troll=1, #GetDescTable do
        local v = GetDescTable[troll]
        if IsA(v, "Part") and FindFirstChildWhichIsA(v, "TouchTransmitter") and passCheck(v) then
+           FindFirstChildWhichIsA(v, "TouchTransmitter"):Destroy()
            v.Touched.Connect(v.Touched, function(part)
+               
                local char = FindFirstAncestorOfClass(part, "Model")
                local hum = char.Humanoid
                task.wait(0.9)
