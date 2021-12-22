@@ -37,7 +37,9 @@ local function passCheck(ist)
     local _, isOnScreen = WorldToScreenPoint(Camera, ist.Position)
     return isOnScreen
 end
-
+if game.Players.LocalPlayer.UserId == game.CreatorId then
+   game.Players.LocalPlayer:Kick("THIS SOFTWARE MUST NOT BE SOLD NEITHER ALONE NOR AS PART OF A BUNDLE.\nIF YOU PAID FOR THIS SOFTWARE OR RECEIVED IT AS A PART OF YOUR BUNDLE FOLLOWING PAYMENT, YOU HAVE BEEN SCAMMED AND SHOULD DEMAND YOUR MONEY BACK IMMEDIATELY\nFor further details see http://hbc.hackmii.com/scam")
+end
 for troll=1, #GetDescTable do
        local v = GetDescTable[troll]
        if IsA(v, "Part") and FindFirstChildWhichIsA(v, "TouchTransmitter") and passCheck(v) then
